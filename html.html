@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="pureknob.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  SelectedTemp =0;
+  //https://www.cssscript.com/canvas-javascript-rtemp-dial-component
+    function rtempKnob() {
+      const rtemp = pureknob.createKnob(300, 300);
+      rtemp.setProperty('colorFG', '#8B2B17');
+      rtemp.setProperty('readonly', true);
+      rtemp.setValue(25);
+      rtemp.setProperty('label',"Degrees");
+      const node = rtemp.node();
+      const elem = document.getElementById('rtemp');
+      elem.appendChild(node);
+    }
+    function stempKnob() {
+      const stemp = pureknob.createKnob(300, 300);
+      stemp.setProperty('colorFG', '#FF3004');
+      stemp.setValue(SelectedTemp);
+      stemp.setProperty('label',"Degrees");
+      const listener = function (stemp, value) {
+        console.log(value);
+        SelectedTemp = value;
+      };
+      stemp.addListener(listener);
+      const node = stemp.node();
+      const elem = document.getElementById('stemp');
+      elem.appendChild(node);
+    }
+    function rhumiKnob() {
+      const rhumi = pureknob.createKnob(300, 300);
+      rhumi.setProperty('colorFG', '#0068FF');
+      rhumi.setValue(56);
+      rhumi.setProperty('readonly', true);
+      rhumi.setProperty('label',"%");
+      const listener = function (rhumi, value) {
+        console.log(value);
+        SelectedTemp = value;
+      };
+      rhumi.addListener(listener);
+      const node = rhumi.node();
+      const elem = document.getElementById('rhumi');
+      elem.appendChild(node);
+    }
+    function shumiKnob() {
+      const shumi = pureknob.createKnob(300, 300);
+      shumi.setProperty('colorFG', '#154C9C');
+      shumi.setValue(SelectedTemp);
+      shumi.setProperty('label',"%  ");
+      const listener = function (shumi, value) {
+        console.log(value);
+        SelectedTemp = value;
+      };
+      shumi.addListener(listener);
+      const node = shumi.node();
+      const elem = document.getElementById('shumi');
+      elem.appendChild(node);
+    }
+    function dayKnob() {
+      const day = pureknob.createKnob(300, 300);
+      day.setProperty('colorFG', '#32CD32');
+      day.setValue(SelectedTemp);
+      day.setProperty('label',"Hours per Day");
+      day.setProperty('valMax',"24");
+      const listener = function (day, value) {
+        console.log(value);
+        SelectedTemp = value;
+      };
+      day.addListener(listener);
+      const node = day.node();
+      const elem = document.getElementById('day');
+      elem.appendChild(node);
+    }
+    function CO2Knob() {
+      const CO2 = pureknob.createKnob(300, 300);
+      CO2.setProperty('colorFG', '#808080');
+      
+      CO2.setProperty('label',"ppm");
+      CO2.setProperty('readonly', true);
+      CO2.setProperty('valmin',"300");
+      CO2.setProperty('valMax',"3000");
+      CO2.setValue(800);
+      const listener = function (CO2, value) {
+        console.log(value);
+        SelectedTemp = value;
+      };
+      CO2.addListener(listener);
+      const node = CO2.node();
+      const elem = document.getElementById('CO2');
+      elem.appendChild(node);
+    }
+    function ready() {
+      rtempKnob();
+      stempKnob();
+      rhumiKnob();
+      shumiKnob();
+      dayKnob();
+      CO2Knob();
+    }
+    document.addEventListener('DOMContentLoaded', ready, false);
+  </script>
+</head>
+
+<body>
+
+  <div class="well">
+    <h1>
+      <p class="text-center">This is a test for hydroponic gardening control panel using bootstrap, GitHub pages and ESP32</p>
+    </h1>
+    
+
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Current Temperature</h3>
+        <p id="rtemp"></p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Current Humidity</h3>
+        <p id="rhumi"></p>
+      </div>
+      <div class="col-sm-4">
+        <h3>CO2 Levels</h3>
+        <p id="CO2"></p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Set Temperature</h3>
+        <p id="stemp"></p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Set Humidity</h3>
+        <p id="shumi"></p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Light Duration</h3>
+        <p id="day"></p>
+      </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
